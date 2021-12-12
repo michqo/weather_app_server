@@ -6,18 +6,20 @@ import { Temp } from "./temp";
 let client = new mongoDB.MongoClient(process.env.MONGODB_URI!);
 client.connect();
 const db = client.db("weather-app");
-const tempsColl = db.collection(process.env.MONGODB_NAME!);
-//const lastTempColl = db.collection("last_temp");
+const tempsColl = db.collection<Temp>(process.env.MONGODB_NAME!);
+const lastTempColl = db.collection<Temp>("last_temp");
 
 const app: Express = express();
 app.use(express.json());
 
-app.post("/add_temp", (req: Request, res: Response) => {
+app.post("/add_temp", async (req: Request, res: Response) => {
 	const temp = req.body as Temp;
 
 	tempsColl.insertOne(temp);
+	const lastTempDoc = (await lastTempColl.findOne({})) as Temp;
+	temp._id = lastTempDoc._id;
 	// {} to update all (1 temp)
-	//lastTempColl.replaceOne({}, temp);
+	lastTempColl.replaceOne({}, temp);
 
 	res.send(temp.averageTemp);
 });
