@@ -24,6 +24,22 @@ app.post("/add_temp", async (req: Request, res: Response) => {
 	res.send(temp.averageTemp);
 });
 
+app.get("/temps/:n", async (req: Request, res: Response) => {
+	let n = Number(req.params.n);
+	if (!isNaN(n)) {
+		const temp = (await tempsColl.find({d: n}).toArray()) as Temp[];
+		res.send(temp);
+	} else {
+		res.send("{}")
+	}
+
+});
+
+app.get("/last_temp", async (_req: Request, res: Response) => {
+	const lastTemp = (await lastTempColl.findOne({})) as Temp;
+	res.send(lastTemp);
+});
+
 app.listen(3030, () => {
 	console.log("started");
 });
