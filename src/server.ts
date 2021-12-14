@@ -1,5 +1,6 @@
 import express, { Request, Response, Express } from "express";
 import "dotenv/config";
+import cors from "cors";
 import { Temp } from "./types";
 import Db from "./db";
 
@@ -7,6 +8,7 @@ let db = new Db();
 
 const app: Express = express();
 app.use(express.json());
+app.use(cors());
 
 app.post("/add_temp", async (req: Request, res: Response) => {
 	const temp = req.body as Temp;
