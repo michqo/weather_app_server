@@ -18,12 +18,23 @@ app.post("/add_temp", async (req: Request, res: Response) => {
 	res.send("{}");
 });
 
-app.get("/temps/:n", async (req: Request, res: Response) => {
-	let n = Number(req.params.n);
-	if (!isNaN(n)) {
-		res.send(await db.getTemps(n));
+app.get("/temps/:m/:d", async (req: Request, res: Response) => {
+	let m = Number(req.params.m);
+	let d = Number(req.params.d);
+	if (!isNaN(m) && !isNaN(d)) {
+		res.send(await db.getTemps(m, d));
 	} else {
-		res.send("{}")
+		res.send("[]")
+	}
+
+});
+
+app.get("/last_days/:d", async (req: Request, res: Response) => {
+	let d = Number(req.params.d);
+	if (!isNaN(d)) {
+		res.send(await db.lastDays(d));
+	} else {
+		res.send("[]")
 	}
 
 });
@@ -32,6 +43,6 @@ app.get("/last_temp", async (_req: Request, res: Response) => {
 	res.send(await db.lastTemp());
 });
 
-app.listen(3030, () => {
+app.listen(8080, () => {
 	console.log("started");
 });

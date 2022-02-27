@@ -27,8 +27,20 @@ class Db {
         await this.lastTempColl.replaceOne({}, t);
     }
 
-    async getTemps(n: number): Promise<Temp[]> {
-        return (await this.temps.find({ d: n }).toArray()) as Temp[];
+    async getTemps(m: number, d: number): Promise<Temp[]> {
+        return (await this.temps.find({ m: m, d: d }).toArray()) as Temp[];
+    }
+
+    async lastDays(d: number): Promise<Temp[]> {
+		let now = new Date();
+		let weekAgo = new Date();
+		weekAgo.setDate(now.getDate() - d);
+        return (await this.temps.find(
+			{
+				"d": { "$gt": weekAgo.getDate() - 1, "$lt": now.getDate() + 1 },
+				"m": { "$in": [ weekAgo.getMonth() + 1, now.getMonth() + 1 ] }
+			}
+		).toArray()) as Temp[];
     }
 }
 
