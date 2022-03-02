@@ -32,15 +32,30 @@ class Db {
     }
 
     async lastDays(d: number): Promise<Temp[]> {
-		let now = new Date();
+		let date = new Date();
 		let weekAgo = new Date();
-		weekAgo.setDate(now.getDate() - d);
-        return (await this.temps.find(
-			{
-				"d": { "$gt": weekAgo.getDate() - 1, "$lt": now.getDate() + 1 },
-				"m": { "$in": [ weekAgo.getMonth() + 1, now.getMonth() + 1 ] }
+		weekAgo.setDate(date.getDate() - d);
+		let nowDays: number[] = [];
+		let beforeDays: number[] = [];
+		for (let i = 0; i < d; i++) {
+			if (date.getMonth() == weekAgo.getMonth()) {
+				beforeDays.push(date.getDate());
+			} else {
+				nowDays.push(date.getDate());
 			}
-		).toArray()) as Temp[];
+			date.setDate(date.getDate() - 1);
+		}
+		console.log(`beforedays: ${beforeDays}`);
+		console.log(`nowDays: ${nowDays}`);
+		let temps1: Temp[] = await this.temps.find({
+				"d": { "$in": beforeDays },
+				"m": weekAgo.getMonth() + 1
+			}).toArray();
+		let temps2: Temp[] = await this.temps.find({
+				"d": { "$in": nowDays },
+				"m": new Date().getMonth() + 1
+			}).toArray();
+		return temps1.concat(temps2);
     }
 }
 

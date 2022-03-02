@@ -32,7 +32,12 @@ app.get("/temps/:m/:d", async (req: Request, res: Response) => {
 app.get("/last_days/:d", async (req: Request, res: Response) => {
 	let d = Number(req.params.d);
 	if (!isNaN(d)) {
-		res.send(await db.lastDays(d));
+		// Because of not using normal timestamps
+		if (d == 0 || d > 29) {
+			res.send("[]")
+		} else {
+			res.send(await db.lastDays(d));
+		}
 	} else {
 		res.send("[]")
 	}
