@@ -1,4 +1,4 @@
 curl --header "Content-Type: application/json" \
 	 --request POST \
-	 --data '{"y":2021,"m":12,"d":11,"h":22,"averageTemp":"-2"}' \
-	 http://localhost:3030/add_temp
+	 --data '{"y":2022,"m":3,"d":12,"h":18,"averageTemp":"22.84"}' \
+	 http://127.0.0.1:8000
