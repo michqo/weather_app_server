@@ -39,21 +39,22 @@ class Db {
 		let beforeDays: number[] = [];
 		for (let i = 0; i < d; i++) {
 			if (date.getMonth() == weekAgo.getMonth()) {
-				beforeDays.push(date.getDate());
-			} else {
 				nowDays.push(date.getDate());
+			} else {
+				beforeDays.push(date.getDate());
 			}
 			date.setDate(date.getDate() - 1);
 		}
-		console.log(`beforedays: ${beforeDays}`);
-		console.log(`nowDays: ${nowDays}`);
 		let temps1: Temp[] = await this.temps.find({
+			"d": { "$in": nowDays },
+			"m": new Date().getMonth() + 1
+		}).toArray();
+		if (beforeDays.length == 0) {
+			return temps1;
+		}
+		let temps2: Temp[] = await this.temps.find({
 				"d": { "$in": beforeDays },
 				"m": weekAgo.getMonth() + 1
-			}).toArray();
-		let temps2: Temp[] = await this.temps.find({
-				"d": { "$in": nowDays },
-				"m": new Date().getMonth() + 1
 			}).toArray();
 		return temps1.concat(temps2);
     }

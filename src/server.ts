@@ -48,6 +48,6 @@ app.get("/last_temp", async (_req: Request, res: Response) => {
 	res.send(await db.lastTemp());
 });
 
-app.listen(8080, () => {
+app.listen(8000, () => {
 	console.log("started");
 });
