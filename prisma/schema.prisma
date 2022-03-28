@@ -1,0 +1,29 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+generator db {
+  provider  = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+  // required because of https://github.com/prisma/prisma/issues/2584#issuecomment-646414549
+  output = "../node_modules/.prisma/client"
+}
+
+model Temp {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  y             Int
+  m             Int
+  d             Int
+  h             Int
+  averageTemp   String
+}
+
+model LastTemp {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  y             Int
+  m             Int
+  d             Int
+  h             Int
+  averageTemp   String
+}

@@ -1,5 +1,5 @@
-DATA='{"y":2022,"m":3,"d":12,"h":18,"averageTemp":"22.17"}'
-URL="http://127.0.0.1:8000"
+DATA='{"y":2022,"m":3,"d":28,"h":21,"averageTemp":"22.17"}'
+URL="http://localhost:8000"
 METHOD="add_temp"
 URL_BOTH=""
 
