@@ -6,5 +6,5 @@ ts server for my weather app
 
 ### todo
 
-- [ ] try prisma
+- [x] try prisma
 - [ ] more secure
