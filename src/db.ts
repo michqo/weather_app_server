@@ -1,34 +1,45 @@
-import * as mongoDB from "mongodb";
-import { Temp } from "./types";
+import { LastTemp, Temp, PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 class Db {
-  private client: mongoDB.MongoClient;
-  private temps: mongoDB.Collection<Temp>;
-  private lastTempColl: mongoDB.Collection<Temp>;
-
-  constructor() {
-    this.client = new mongoDB.MongoClient(process.env.MONGODB_URI!);
-    this.client.connect();
-    let db = this.client.db("weather-app");
-    this.temps = db.collection<Temp>(process.env.MONGODB_NAME!);
-    this.lastTempColl = db.collection<Temp>("last_temp");
+  async connect(): Promise<void> {
+    await prisma.$connect().catch((e: Error) => {
+      throw e;
+    }).finally(async () => {
+      await prisma.$disconnect();
+    });
   }
 
-  async lastTemp(): Promise<Temp> {
-    return await (this.lastTempColl.findOne({})) as Temp;
+  async lastTemp(): Promise<LastTemp> {
+    return await prisma.lastTemp.findFirst()
+  }
+
+  async addLastTemp(t: LastTemp) {
+    const lastT = await prisma.lastTemp.findFirst();
+    await prisma.lastTemp.update({
+      where: {
+        id: lastT.id
+      },
+      data: t
+    })
   }
 
   async addTemp(t: Temp) {
-    let lastT = await this.lastTemp();
-    t._id = new mongoDB.ObjectId();
-    await this.temps.insertOne(t);
-    t._id = lastT._id;
-    // {} to update all (1 temp doc)
-    await this.lastTempColl.replaceOne({}, t);
+    const lastT = await prisma.lastTemp.findFirst();
+    await prisma.temp.create({
+      data: t
+    })
+    await prisma.lastTemp.update({
+      where: {
+        id: lastT.id
+      },
+      data: t
+    })
   }
 
   async getTemps(m: number, d: number): Promise<Temp[]> {
-    return (await this.temps.find({ m: m, d: d }).toArray()) as Temp[];
+    return await prisma.temp.findMany({ where: { m: m, d: d } });
   }
 
   async lastDays(d: number): Promise<Temp[]> {
@@ -45,18 +56,20 @@ class Db {
       }
       date.setDate(date.getDate() - 1);
     }
-    let temps1: Temp[] = await this.temps.find({
-      "d": { "$in": nowDays },
-      "m": new Date().getMonth() + 1
-    }).toArray();
-    if (beforeDays.length == 0) {
-      return temps1;
-    }
-    let temps2: Temp[] = await this.temps.find({
-      "d": { "$in": beforeDays },
-      "m": weekAgo.getMonth() + 1
-    }).toArray();
-    return temps1.concat(temps2);
+    return await prisma.temp.findMany({
+      where: {
+        OR: [
+          {
+            "d": { "in": nowDays },
+            "m": new Date().getMonth() + 1
+          },
+          {
+            "d": { "in": beforeDays },
+            "m": weekAgo.getMonth() + 1
+          }
+        ]
+      }
+    });
   }
 }
 

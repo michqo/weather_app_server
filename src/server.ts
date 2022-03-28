@@ -1,10 +1,11 @@
 import express, { Request, Response, Express } from "express";
-import "dotenv/config";
+import { LastTemp, Temp } from "@prisma/client";
 import cors from "cors";
-import { Temp } from "./types";
 import Db from "./db";
 
-let db = new Db();
+const db = new Db();
+
+db.connect();
 
 const app: Express = express();
 app.use(express.json());
@@ -14,6 +15,14 @@ app.post("/add_temp", async (req: Request, res: Response) => {
 	const temp = req.body as Temp;
 
 	db.addTemp(temp);
+
+	res.send("{}");
+});
+
+app.post("/add_last_temp", async (req: Request, res: Response) => {
+	const temp = req.body as LastTemp;
+
+	db.addLastTemp(temp);
 
 	res.send("{}");
 });
