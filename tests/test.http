@@ -1,4 +1,4 @@
-POST http://localhost:3030/add_temp HTTP/1.1
+POST http://localhost:8000/add_temp HTTP/1.1
 content-type: application/json
 
 {
