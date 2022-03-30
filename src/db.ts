@@ -26,14 +26,7 @@ class Db {
   }
 
   async addTemp(t: Temp) {
-    const lastT = await prisma.lastTemp.findFirst();
     await prisma.temp.create({
-      data: t
-    })
-    await prisma.lastTemp.update({
-      where: {
-        id: lastT.id
-      },
       data: t
     })
   }

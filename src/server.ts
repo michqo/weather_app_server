@@ -8,8 +8,8 @@ const db = new Db();
 db.connect();
 
 const app: Express = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.post("/add_temp", async (req: Request, res: Response) => {
 	const temp = req.body as Temp;

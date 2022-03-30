@@ -1,7 +1,4 @@
-import * as mongoDB from "mongodb";
-
-export interface Temp extends mongoDB.Document {
-  _id: mongoDB.ObjectId,
+export interface ITemp {
   y: number,
   m: number,
   d: number,
