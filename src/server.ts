@@ -60,3 +60,5 @@ app.get("/last_temp", async (_req: Request, res: Response) => {
 app.listen(8000, () => {
 	console.log("started");
 });
+
+export default app;
