@@ -1,4 +1,4 @@
-import { LastTemp, Temp, PrismaClient } from '@prisma/client'
+import { Temp, LastTemp, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
@@ -43,19 +43,23 @@ class Db {
     let beforeDays: number[] = [];
     for (let i = 0; i < d; i++) {
       if (date.getMonth() == weekAgo.getMonth()) {
-        nowDays.push(date.getDate());
-      } else {
         beforeDays.push(date.getDate());
+      } else {
+        nowDays.push(date.getDate());
       }
       date.setDate(date.getDate() - 1);
     }
+    console.log(`nowDays: ${nowDays}\nbeforeDays: ${beforeDays}`);
+    console.log(`month week ago: ${weekAgo.getMonth() + 1}`);
     return await prisma.temp.findMany({
       where: {
         OR: [
+          /*
           {
             "d": { "in": nowDays },
             "m": new Date().getMonth() + 1
           },
+          */
           {
             "d": { "in": beforeDays },
             "m": weekAgo.getMonth() + 1
