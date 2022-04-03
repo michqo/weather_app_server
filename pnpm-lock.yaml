@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@prisma/client': ^3.11.1
+  '@swc-node/jest': ^1.4.3
   '@swc/cli': ^0.1.55
   '@swc/core': ^1.2.154
   '@types/cors': ^2.8.12
@@ -14,7 +15,6 @@ specifiers:
   jest: ^27.5.1
   prisma: ^3.11.1
   supertest: ^6.2.2
-  ts-jest: ^27.1.4
   ts-node: ^10.4.0
   ts-node-dev: ^1.1.8
   typescript: ^4.5.3
@@ -25,6 +25,7 @@ dependencies:
   express: 4.17.1
 
 devDependencies:
+  '@swc-node/jest': 1.4.3
   '@swc/cli': 0.1.55_@swc+core@1.2.154
   '@swc/core': 1.2.154
   '@types/cors': 2.8.12
@@ -35,7 +36,6 @@ devDependencies:
   jest: 27.5.1_ts-node@10.4.0
   prisma: 3.11.1
   supertest: 6.2.2
-  ts-jest: 27.1.4_9992df5214b5fe2a6c7bfe8e8989937c
   ts-node: 10.4.0_832be778823d0e7733c3a167d9585e6a
   ts-node-dev: 1.1.8_typescript@4.5.3
   typescript: 4.5.3
@@ -607,6 +607,142 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.11
     dev: true
 
+  /@node-rs/xxhash-android-arm-eabi/1.2.0:
+    resolution: {integrity: sha512-14iAOxPBqOvt0uti+7uMO78cxT/HCqrbxDXXYPL+JZyOZdCB+qq3Q1uelj84ZHpmPjQyYTfaYZlBtO8R3dygEA==}
+    engines: {node: '>= 12'}
+    cpu: [arm]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-android-arm64/1.2.0:
+    resolution: {integrity: sha512-WXjmdAqf5c2tSC9awaerBFCB0usS0Ns0/KL7PSZe0foDHy5BiQMGVFX8qhSMDNjYb2BNGoG9W+glBACj6xf/2Q==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-darwin-arm64/1.2.0:
+    resolution: {integrity: sha512-3GsMqaok+nD71myyPyXpjfEzn3NGJwXPNxner45PlYylYazrY79lGPmqQkBWb4GsVJxJeeFAtRV4OlP9qVM3BQ==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-darwin-x64/1.2.0:
+    resolution: {integrity: sha512-B68dSmthp6DBD6mXUHu9K0g/YMZ7HXo+UMo3wo28kV21SpN1pOWDyx/pjHBP+f6xbiWlCX3LwUoGM4HmU35kNg==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-freebsd-x64/1.2.0:
+    resolution: {integrity: sha512-v1JkceHuUDCvNWLsIjQE938SQhgbHMhsNes8XnHSDdVet4kXxtgSmkheqK+d06g6YTmmbUhDm8KjqmlEEENaDw==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-arm-gnueabihf/1.2.0:
+    resolution: {integrity: sha512-KtozzcaLTfrk0QHwTQ4GVDYFtciwa+o7h50mgs1CtRjijIxtbjVJblcQ0dbCDBNf7kgDn0N58NDlN8JHYiQ0Og==}
+    engines: {node: '>= 12'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-arm64-gnu/1.2.0:
+    resolution: {integrity: sha512-ufsbbWWDQ8LPOes6GdEbtsEHl+9Xikt+YLlyhNNrW5Fvg1LuyDVeDHOiifQ7qvVudPvht73u9Zhv9FhNPdhxCQ==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-arm64-musl/1.2.0:
+    resolution: {integrity: sha512-sJCcw52Q4wIOlGdMc67oVdRT/p1RcXgyLd5vr1rKmKgHv0rTPtvL1nAkApj4U7owG7wTlAQ4YT+U7RJPhGgonA==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-x64-gnu/1.2.0:
+    resolution: {integrity: sha512-7s9bicv+NUqM/Fdba7Qf2GA1EGKslF5pVTPj34a7ZMZ9BlSbXA4bRzUKQpvyPOb4FIWV0RThAGA/n7plcnygTw==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-x64-musl/1.2.0:
+    resolution: {integrity: sha512-/O8YjuGJxRyYIeMoDk5EMZ6HbMNGDu2ep7KVMfq5Tbx1SOtr+A5jsWzHVB6Etl1YNN0fmMsZ5pMObrbFqwmqOw==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-win32-arm64-msvc/1.2.0:
+    resolution: {integrity: sha512-C6Ld4dhS1bfTkZvo1TTf61aN1WDI7OVCzxevCFCZIv2RTAVMNQ3RDYZNcITDgzF/EFkYenNlaUXrE4NzRr4X1w==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-win32-ia32-msvc/1.2.0:
+    resolution: {integrity: sha512-oo16xkvs2nhdiGIi+aWzRGJMLgOg8Zio074JRimRUa0cbDcdyzJim0LHIz5o/fAW9OmZN9JqhiLc/lUNVRPczw==}
+    engines: {node: '>= 12'}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-win32-x64-msvc/1.2.0:
+    resolution: {integrity: sha512-RFTbA0OjKljgHXEKrSG7dyBbjkT7k9skuRdXW8Ok93Ob1gzwmdAb+75VsA7lMVD87mgbDeSaqziPT9SFXlKDtg==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash/1.2.0:
+    resolution: {integrity: sha512-iwsUoCbnq85QAXBdF9qJjFW+KDr94ycPCCuOCahmucYymeM96bdrlVZUnbiFxN5AF/+0aCDpsjIeRnxsXSXp8Q==}
+    engines: {node: '>= 12'}
+    optionalDependencies:
+      '@node-rs/xxhash-android-arm-eabi': 1.2.0
+      '@node-rs/xxhash-android-arm64': 1.2.0
+      '@node-rs/xxhash-darwin-arm64': 1.2.0
+      '@node-rs/xxhash-darwin-x64': 1.2.0
+      '@node-rs/xxhash-freebsd-x64': 1.2.0
+      '@node-rs/xxhash-linux-arm-gnueabihf': 1.2.0
+      '@node-rs/xxhash-linux-arm64-gnu': 1.2.0
+      '@node-rs/xxhash-linux-arm64-musl': 1.2.0
+      '@node-rs/xxhash-linux-x64-gnu': 1.2.0
+      '@node-rs/xxhash-linux-x64-musl': 1.2.0
+      '@node-rs/xxhash-win32-arm64-msvc': 1.2.0
+      '@node-rs/xxhash-win32-ia32-msvc': 1.2.0
+      '@node-rs/xxhash-win32-x64-msvc': 1.2.0
+    dev: true
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -661,6 +797,20 @@ packages:
     resolution: {integrity: sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==}
     dependencies:
       '@sinonjs/commons': 1.8.3
+    dev: true
+
+  /@swc-node/core/1.8.2:
+    resolution: {integrity: sha512-IoJ7tGHQ6JOMSmFe4VhP64uLmFKMNasS0QEgUrLFQ0h/dTvpQMynnoGBEJoPL6LfsebZ/q4uKqbpWrth6/yrAA==}
+    engines: {node: '>= 10'}
+    dependencies:
+      '@swc/core': 1.2.154
+    dev: true
+
+  /@swc-node/jest/1.4.3:
+    resolution: {integrity: sha512-pMWida9hKd/c6fUor+Sd+Oikxl7X23o9U/MmXsaPEt2gWx5Ar9JjGo0h0Vd30h5Cua2F0FD4/42qeAmMj0qskw==}
+    dependencies:
+      '@node-rs/xxhash': 1.2.0
+      '@swc-node/core': 1.8.2
     dev: true
 
   /@swc/cli/0.1.55_@swc+core@1.2.154:
@@ -1234,13 +1384,6 @@ packages:
       escalade: 3.1.1
       node-releases: 2.0.2
       picocolors: 1.0.0
-    dev: true
-
-  /bs-logger/0.2.6:
-    resolution: {integrity: sha512-pd8DCoxmbgc7hyPKOvxtqNcjYoOsABPQdcCUjGp3d42VR2CX1ORhk2A87oqqu5R1kk+76nsxZupkmyd+MVtCog==}
-    engines: {node: '>= 6'}
-    dependencies:
-      fast-json-stable-stringify: 2.1.0
     dev: true
 
   /bser/2.1.1:
@@ -2663,10 +2806,6 @@ packages:
       p-locate: 4.1.0
     dev: true
 
-  /lodash.memoize/4.1.2:
-    resolution: {integrity: sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=}
-    dev: true
-
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
@@ -3407,40 +3546,6 @@ packages:
   /tree-kill/1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
-    dev: true
-
-  /ts-jest/27.1.4_9992df5214b5fe2a6c7bfe8e8989937c:
-    resolution: {integrity: sha512-qjkZlVPWVctAezwsOD1OPzbZ+k7zA5z3oxII4dGdZo5ggX/PL7kvwTM0pXTr10fAtbiVpJaL3bWd502zAhpgSQ==}
-    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
-    hasBin: true
-    peerDependencies:
-      '@babel/core': '>=7.0.0-beta.0 <8'
-      '@types/jest': ^27.0.0
-      babel-jest: '>=27.0.0 <28'
-      esbuild: '*'
-      jest: ^27.0.0
-      typescript: '>=3.8 <5.0'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      '@types/jest':
-        optional: true
-      babel-jest:
-        optional: true
-      esbuild:
-        optional: true
-    dependencies:
-      '@types/jest': 27.4.1
-      bs-logger: 0.2.6
-      fast-json-stable-stringify: 2.1.0
-      jest: 27.5.1_ts-node@10.4.0
-      jest-util: 27.5.1
-      json5: 2.2.1
-      lodash.memoize: 4.1.2
-      make-error: 1.3.6
-      semver: 7.3.5
-      typescript: 4.5.3
-      yargs-parser: 20.2.9
     dev: true
 
   /ts-node-dev/1.1.8_typescript@4.5.3:
