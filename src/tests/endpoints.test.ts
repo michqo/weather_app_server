@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import app from "../server";
+import { app, server, db } from "../server";
 
 const request = supertest(app);
 
@@ -18,4 +18,9 @@ describe("Test endpoints", () => {
     expect(response.body).toBeInstanceOf(Object);
     expect(response.status).toBe(200);
   });
+});
+
+afterAll(async () => {
+  server.close();
+  await db.disconnect();
 });

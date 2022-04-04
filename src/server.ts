@@ -57,8 +57,8 @@ app.get("/last_temp", async (_req: Request, res: Response) => {
   res.send(await db.lastTemp() ?? "{}");
 });
 
-app.listen(8000, () => {
+const server = app.listen(8000, () => {
 	console.log("started");
 });
 
-export default app;
+export {app, server, db};

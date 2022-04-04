@@ -11,6 +11,10 @@ class Db {
     });
   }
 
+  async disconnect(): Promise<void> {
+    await prisma.$disconnect();
+  }
+
   async lastTemp(): Promise<LastTemp | null> {
     return await prisma.lastTemp.findFirst()
   }
