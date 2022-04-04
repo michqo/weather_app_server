@@ -54,7 +54,7 @@ app.get("/last_days/:d", async (req: Request, res: Response) => {
 });
 
 app.get("/last_temp", async (_req: Request, res: Response) => {
-	res.send(await db.lastTemp());
+  res.send(await db.lastTemp() ?? "{}");
 });
 
 app.listen(8000, () => {

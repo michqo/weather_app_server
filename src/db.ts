@@ -1,4 +1,4 @@
-import { Temp, LastTemp, PrismaClient } from '@prisma/client';
+import { LastTemp, Temp, PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -11,15 +11,19 @@ class Db {
     });
   }
 
-  async lastTemp(): Promise<LastTemp> {
+  async lastTemp(): Promise<LastTemp | null> {
     return await prisma.lastTemp.findFirst()
   }
 
-  async addLastTemp(t: LastTemp) {
+  async addLastTemp(t: LastTemp): Promise<void> {
     const lastT = await prisma.lastTemp.findFirst();
+    if (!lastT) {
+      await prisma.lastTemp.create({data: t});
+      return;
+    }
     await prisma.lastTemp.update({
       where: {
-        id: lastT.id
+        id: lastT?.id
       },
       data: t
     })
@@ -43,23 +47,19 @@ class Db {
     let beforeDays: number[] = [];
     for (let i = 0; i < d; i++) {
       if (date.getMonth() == weekAgo.getMonth()) {
-        beforeDays.push(date.getDate());
-      } else {
         nowDays.push(date.getDate());
+      } else {
+        beforeDays.push(date.getDate());
       }
       date.setDate(date.getDate() - 1);
     }
-    console.log(`nowDays: ${nowDays}\nbeforeDays: ${beforeDays}`);
-    console.log(`month week ago: ${weekAgo.getMonth() + 1}`);
     return await prisma.temp.findMany({
       where: {
         OR: [
-          /*
           {
             "d": { "in": nowDays },
             "m": new Date().getMonth() + 1
           },
-          */
           {
             "d": { "in": beforeDays },
             "m": weekAgo.getMonth() + 1
