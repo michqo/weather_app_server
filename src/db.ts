@@ -51,9 +51,9 @@ class Db {
     let beforeDays: number[] = [];
     for (let i = 0; i < d; i++) {
       if (date.getMonth() == weekAgo.getMonth()) {
-        nowDays.push(date.getDate());
-      } else {
         beforeDays.push(date.getDate());
+      } else {
+        nowDays.push(date.getDate());
       }
       date.setDate(date.getDate() - 1);
     }
