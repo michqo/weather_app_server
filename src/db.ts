@@ -43,6 +43,19 @@ class Db {
     return await prisma.temp.findMany({ where: { m: m, d: d } });
   }
 
+  async average(): Promise<string | null> {
+    const date = new Date();
+    const temps = await prisma.temp.findMany({ where: { m: date.getMonth() + 1, d: date.getDate() } });
+    let sum = 0;
+    const len = temps.length;
+    if (len == 0) return null;
+    for (let i = 0; i < len; i++) {
+      sum += parseFloat(temps[i].averageTemp);
+    }
+
+    return (sum / len).toFixed(2);
+  }
+
   async lastDays(d: number): Promise<Temp[]> {
     let date = new Date();
     let weekAgo = new Date();

@@ -57,6 +57,10 @@ app.get("/last_temp", async (_req: Request, res: Response) => {
   res.send(await db.lastTemp() ?? "{}");
 });
 
+app.get("/average", async (_req: Request, res: Response) => {
+  res.send({"average": await db.average() ?? "NaN"});
+});
+
 const server = app.listen(8000, () => {
 	console.log("started");
 });
