@@ -43,9 +43,8 @@ class Db {
     return await prisma.temp.findMany({ where: { m: m, d: d } });
   }
 
-  async average(): Promise<string | null> {
-    const date = new Date();
-    const temps = await prisma.temp.findMany({ where: { m: date.getMonth() + 1, d: date.getDate() } });
+  async average(m: number, d: number): Promise<string | null> {
+    const temps = await prisma.temp.findMany({ where: { m, d } });
     let sum = 0;
     const len = temps.length;
     if (len == 0) return null;
