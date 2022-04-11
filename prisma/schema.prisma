@@ -5,9 +5,8 @@ datasource db {
 
 generator db {
   provider  = "prisma-client-js"
-  previewFeatures = ["mongoDb"]
   // required because of https://github.com/prisma/prisma/issues/2584#issuecomment-646414549
-  output = "../node_modules/.prisma/client"
+  // output = "../node_modules/.prisma/client"
 }
 
 model Temp {
