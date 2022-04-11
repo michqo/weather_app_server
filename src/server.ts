@@ -61,7 +61,7 @@ app.get("/average/:m/:d", async (req: Request, res: Response) => {
 	let m = Number(req.params.m);
 	let d = Number(req.params.d);
 	if (!isNaN(m) && !isNaN(d)) {
-    res.send({"average": await db.average(m, d) ?? "NaN"});
+    res.send({"average": await db.average(m, d) ?? NaN});
 	} else {
 		res.send("{}")
 	}

@@ -43,7 +43,7 @@ class Db {
     return await prisma.temp.findMany({ where: { m: m, d: d } });
   }
 
-  async average(m: number, d: number): Promise<string | null> {
+  async average(m: number, d: number): Promise<number | null> {
     const temps = await prisma.temp.findMany({ where: { m, d } });
     let sum = 0;
     const len = temps.length;
@@ -52,7 +52,7 @@ class Db {
       sum += parseFloat(temps[i].averageTemp);
     }
 
-    return (sum / len).toFixed(2);
+    return parseFloat((sum / len).toFixed(2));
   }
 
   async lastDays(d: number): Promise<Temp[]> {
