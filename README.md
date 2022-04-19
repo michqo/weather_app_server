@@ -4,11 +4,11 @@
 
 ts server for my weather app
 
-### note regarding pnpm
+## note regarding pnpm
 
-use pnpm at your own risk because of problems with prisma and pnpm
+use pnpm at your own risk because of possible problems between prisma and pnpm
 
-### todo
+## todo
 
 - [x] try prisma
 - [ ] more secure
