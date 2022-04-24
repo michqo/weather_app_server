@@ -22,7 +22,7 @@ class Db {
   async addLastTemp(t: LastTemp): Promise<void> {
     const lastT = await prisma.lastTemp.findFirst();
     if (!lastT) {
-      await prisma.lastTemp.create({data: t});
+      await prisma.lastTemp.create({ data: t });
       return;
     }
     await prisma.lastTemp.update({
@@ -37,6 +37,10 @@ class Db {
     await prisma.temp.create({
       data: t
     })
+  }
+
+  async deleteTemps(m: number, d: number): Promise<void> {
+    await prisma.temp.deleteMany({ where: { m: m, d: d } });
   }
 
   async getTemps(m: number, d: number): Promise<Temp[]> {

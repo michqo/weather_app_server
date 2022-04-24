@@ -27,6 +27,15 @@ app.post("/add_last_temp", async (req: Request, res: Response) => {
 	res.send("{}");
 });
 
+app.delete("/delete_temps/:m/:d", async (req: Request, res: Response) => {
+	let m = Number(req.params.m);
+	let d = Number(req.params.d);
+	if (!isNaN(m) && !isNaN(d)) {
+		await db.deleteTemps(m, d);
+	}
+	res.send("{}");
+});
+
 app.get("/temps/:m/:d", async (req: Request, res: Response) => {
 	let m = Number(req.params.m);
 	let d = Number(req.params.d);
@@ -54,14 +63,14 @@ app.get("/last_days/:d", async (req: Request, res: Response) => {
 });
 
 app.get("/last_temp", async (_req: Request, res: Response) => {
-  res.send(await db.lastTemp() ?? "{}");
+	res.send(await db.lastTemp() ?? "{}");
 });
 
 app.get("/average/:m/:d", async (req: Request, res: Response) => {
 	let m = Number(req.params.m);
 	let d = Number(req.params.d);
 	if (!isNaN(m) && !isNaN(d)) {
-    res.send({"average": await db.average(m, d) ?? NaN});
+		res.send({ "average": await db.average(m, d) ?? NaN });
 	} else {
 		res.send("{}")
 	}
@@ -71,4 +80,4 @@ const server = app.listen(8000, () => {
 	console.log("started");
 });
 
-export {app, server, db};
+export { app, server, db };
