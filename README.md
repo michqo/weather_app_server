@@ -5,7 +5,7 @@
 ## Todo
 
 - [ ] add JWT
-- [ ] make a TypeScript template from this
+- [x] make a TypeScript template from this
 
 ## Links
 
