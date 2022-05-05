@@ -1,14 +1,15 @@
-# weather ts server
+# Weather app server
 
-## info
+**TypeScript server for [weather app](https://github.com/MichalUSER/weather_app)**
 
-ts server for my weather app
+## Todo
 
-## note regarding pnpm
+- [ ] add JWT
+- [ ] make a TypeScript template from this
 
-use pnpm at your own risk because of possible problems between prisma and pnpm
+## Links
 
-## todo
-
-- [x] try prisma
-- [ ] more secure
+[weather_app](https://github.com/MichalUSER/weather_app)
+— [weather_app_client](https://github.com/MichalUSER/weather_app_client)
+— [weather_app_api](https://github.com/MichalUSER/weather_app_api)
+— [weather_app_cli](https://github.com/MichalUSER/weather_app_cli)
