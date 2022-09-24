@@ -6,7 +6,8 @@
     "build": "swc src -d dist",
     "dev": "ts-node-dev --transpile-only --quiet --exit-child -r @swc-node/register src/server.ts",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "@types/node": "^16.11.58",
     "@types/supertest": "^2.0.12",
     "jest": "^27.5.1",
+    "prettier": "^2.7.1",
     "prisma": "^3.15.2",
     "supertest": "^6.2.4",
     "ts-node-dev": "^1.1.8",
