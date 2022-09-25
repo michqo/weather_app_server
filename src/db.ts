@@ -1,14 +1,17 @@
-import { LastTemp, Temp, PrismaClient } from '@prisma/client'
+import { LastTemp, Temp, PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 class Db {
   async connect(): Promise<void> {
-    await prisma.$connect().catch((e: Error) => {
-      throw e;
-    }).finally(async () => {
-      await prisma.$disconnect();
-    });
+    await prisma
+      .$connect()
+      .catch((e: Error) => {
+        throw e;
+      })
+      .finally(async () => {
+        await prisma.$disconnect();
+      });
   }
 
   async disconnect(): Promise<void> {
@@ -16,7 +19,7 @@ class Db {
   }
 
   async lastTemp(): Promise<LastTemp | null> {
-    return await prisma.lastTemp.findFirst()
+    return await prisma.lastTemp.findFirst();
   }
 
   async addLastTemp(t: LastTemp): Promise<void> {
@@ -27,16 +30,16 @@ class Db {
     }
     await prisma.lastTemp.update({
       where: {
-        id: lastT?.id
+        id: lastT?.id,
       },
-      data: t
-    })
+      data: t,
+    });
   }
 
   async addTemp(t: Temp) {
     await prisma.temp.create({
-      data: t
-    })
+      data: t,
+    });
   }
 
   async deleteTemps(m: number, d: number): Promise<void> {
@@ -77,15 +80,15 @@ class Db {
       where: {
         OR: [
           {
-            "d": { "in": nowDays },
-            "m": new Date().getMonth() + 1
+            d: { in: nowDays },
+            m: new Date().getMonth() + 1,
           },
           {
-            "d": { "in": beforeDays },
-            "m": weekAgo.getMonth() + 1
-          }
-        ]
-      }
+            d: { in: beforeDays },
+            m: weekAgo.getMonth() + 1,
+          },
+        ],
+      },
     });
   }
 }

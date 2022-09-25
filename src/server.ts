@@ -42,9 +42,8 @@ app.get("/temps/:m/:d", async (req: Request, res: Response) => {
   if (!isNaN(m) && !isNaN(d)) {
     res.send(await db.getTemps(m, d));
   } else {
-    res.send("[]")
+    res.send("[]");
   }
-
 });
 
 app.get("/last_days/:d", async (req: Request, res: Response) => {
@@ -52,27 +51,26 @@ app.get("/last_days/:d", async (req: Request, res: Response) => {
   if (!isNaN(d)) {
     // Because of not using normal timestamps
     if (d == 0 || d > 29) {
-      res.send("[]")
+      res.send("[]");
     } else {
       res.send(await db.lastDays(d));
     }
   } else {
-    res.send("[]")
+    res.send("[]");
   }
-
 });
 
 app.get("/last_temp", async (_req: Request, res: Response) => {
-  res.send(await db.lastTemp() ?? "{}");
+  res.send((await db.lastTemp()) ?? "{}");
 });
 
 app.get("/average/:m/:d", async (req: Request, res: Response) => {
   let m = Number(req.params.m);
   let d = Number(req.params.d);
   if (!isNaN(m) && !isNaN(d)) {
-    res.send({ "average": await db.average(m, d) ?? NaN });
+    res.send({ average: (await db.average(m, d)) ?? NaN });
   } else {
-    res.send("{}")
+    res.send("{}");
   }
 });
 

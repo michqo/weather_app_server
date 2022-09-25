@@ -1,7 +1,7 @@
 export interface ITemp {
-  y: number,
-  m: number,
-  d: number,
-  h: number,
-  averageTemp: string
-};
+  y: number;
+  m: number;
+  d: number;
+  h: number;
+  averageTemp: string;
+}
