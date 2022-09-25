@@ -19,6 +19,14 @@ app.post("/add_temp", async (req: Request, res: Response) => {
   res.send("{}");
 });
 
+app.post("/add_temps", async (req: Request, res: Response) => {
+  const temps = req.body as Temp[];
+
+  db.addTemps(temps);
+
+  res.send("{}");
+});
+
 app.post("/add_last_temp", async (req: Request, res: Response) => {
   const temp = req.body as LastTemp;
 
