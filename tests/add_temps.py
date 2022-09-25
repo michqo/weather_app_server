@@ -1,10 +1,12 @@
 import requests
 import datetime
 import random
-from dataclasses import dataclass, asdict
+import sys
+import dataclasses
+from dataclasses import dataclass
 
 URL = "http://localhost:8000"
-add_url = "{}/add_temp".format(URL)
+add_url = "{}/add_temps".format(URL)
 
 @dataclass
 class Temp:
@@ -16,14 +18,22 @@ class Temp:
 
 now = datetime.datetime.now()
 data = Temp(now.year, now.month, now.day)
+temps: list[dict] = []
 
-def post_temp(url: str):
-    requests.post(url, json=asdict(data))
+def main():
+    if len(sys.argv) > 1:
+        if sys.argv[1].isdigit():
+            data.d = int(sys.argv[1])
+    
+    for i in range (0, 24):
+        lower = random.uniform(21, 22.5)
+        upper = random.uniform(22.5, 24.5)
+        temp = random.uniform(lower, upper)
+        data.averageTemp = str(round(temp, 2))
+        data.h = i
+        temps.append(dataclasses.asdict(data))
 
-for i in range (0, 24):
-    lower = random.uniform(21, 22.5)
-    upper = random.uniform(22.5, 24.5)
-    temp = random.uniform(lower, upper)
-    data.averageTemp = str(round(temp, 2))
-    data.h = i 
-    post_temp(add_url)
+    requests.post(add_url, json=temps)
+
+if __name__ == "__main__":
+    main()
