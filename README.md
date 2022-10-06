@@ -1,11 +1,6 @@
 # Weather app server
 
-**TypeScript server for [weather app](https://github.com/MichalUSER/weather_app)**
-
-## Todo
-
-- [ ] add JWT
-- [x] make a TypeScript template from this
+**Server for [weather app](https://github.com/MichalUSER/weather_app)**
 
 ## Links
 
