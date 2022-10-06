@@ -2,6 +2,12 @@
 
 **Server for [weather app](https://github.com/MichalUSER/weather_app)**
 
+## Tech stack
+
+- Express
+- TypeScript
+- Prisma
+
 ## Links
 
 [weather_app](https://github.com/MichalUSER/weather_app)
