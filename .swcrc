@@ -1,9 +1,18 @@
 {
+  "exclude": [".*.js$", ".*.test.*$", ".*.map$"],
+    "jsc": {
+      "target": "es2016",
+      "parser": {
+        "syntax": "typescript",
+        "tsx": false,
+        "decorators": true,
+        "dynamicImport": true
+      },
+    "baseUrl": "src"
+  },
   "module": {
-    "type": "es6",
-    "strict": false,
-    "strictMode": true,
-    "lazy": false,
-    "noInterop": false
+    "type": "commonjs",
+    "strict": true,
+    "strictMode": true
   }
 }
