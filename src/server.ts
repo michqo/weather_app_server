@@ -9,14 +9,13 @@ db.connect();
 
 const app: Express = express();
 app.use(cors());
-app.use(express.json());
 
 app.post("/add_temp", async (req: Request, res: Response) => {
   const temp = req.body as Temp;
 
   db.addTemp(temp);
 
-  res.send("{}");
+  res.json("{}");
 });
 
 app.post("/add_temps", async (req: Request, res: Response) => {
@@ -24,7 +23,7 @@ app.post("/add_temps", async (req: Request, res: Response) => {
 
   db.addTemps(temps);
 
-  res.send("{}");
+  res.json("{}");
 });
 
 app.post("/add_last_temp", async (req: Request, res: Response) => {
@@ -32,7 +31,7 @@ app.post("/add_last_temp", async (req: Request, res: Response) => {
 
   db.addLastTemp(temp);
 
-  res.send("{}");
+  res.json("{}");
 });
 
 app.delete("/delete_temps/:m/:d", async (req: Request, res: Response) => {
@@ -41,16 +40,16 @@ app.delete("/delete_temps/:m/:d", async (req: Request, res: Response) => {
   if (!isNaN(m) && !isNaN(d)) {
     await db.deleteTemps(m, d);
   }
-  res.send("{}");
+  res.json("{}");
 });
 
 app.get("/temps/:m/:d", async (req: Request, res: Response) => {
   let m = Number(req.params.m);
   let d = Number(req.params.d);
   if (!isNaN(m) && !isNaN(d)) {
-    res.send(await db.getTemps(m, d));
+    res.json(await db.getTemps(m, d));
   } else {
-    res.send("[]");
+    res.json("[]");
   }
 });
 
@@ -59,26 +58,26 @@ app.get("/last_days/:d", async (req: Request, res: Response) => {
   if (!isNaN(d)) {
     // Because of not using normal timestamps
     if (d == 0 || d > 29) {
-      res.send("[]");
+      res.json("[]");
     } else {
-      res.send(await db.lastDays(d));
+      res.json(await db.lastDays(d));
     }
   } else {
-    res.send("[]");
+    res.json("[]");
   }
 });
 
 app.get("/last_temp", async (_req: Request, res: Response) => {
-  res.send((await db.lastTemp()) ?? "{}");
+  res.json((await db.lastTemp()) ?? "{}");
 });
 
 app.get("/average/:m/:d", async (req: Request, res: Response) => {
   let m = Number(req.params.m);
   let d = Number(req.params.d);
   if (!isNaN(m) && !isNaN(d)) {
-    res.send({ average: (await db.average(m, d)) ?? NaN });
+    res.json({ average: (await db.average(m, d)) ?? NaN });
   } else {
-    res.send("{}");
+    res.json("{}");
   }
 });
 
