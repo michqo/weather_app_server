@@ -1,14 +1,23 @@
 import express, { Request, Response, Express } from "express";
-import Db from "./db";
 import cors from "cors";
+import rateLimit from "express-rate-limit";
+import Db from "./db";
 import validate from "./validate";
 import { tempSchema, tempsSchema } from "./schemas";
 
 const db = new Db();
 db.connect();
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
 const app: Express = express();
 app.use(cors());
+app.use(limiter);
 app.use(express.json());
 
 app.post(
