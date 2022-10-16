@@ -1,5 +1,6 @@
 import express, { Request, Response, Express } from "express";
 import Db from "./db";
+import cors from "cors";
 import validate from "./validate";
 import { tempSchema, tempsSchema } from "./schemas";
 
@@ -7,6 +8,7 @@ const db = new Db();
 db.connect();
 
 const app: Express = express();
+app.use(cors());
 app.use(express.json());
 
 app.post(
