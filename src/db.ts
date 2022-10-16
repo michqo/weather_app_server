@@ -1,6 +1,11 @@
 import { LastTemp, Temp, PrismaClient } from "@prisma/client";
+import { z } from "zod";
+import { tempSchema, tempsSchema } from "./schemas";
 
 const prisma = new PrismaClient();
+
+type TempSchema = z.infer<typeof tempSchema>;
+type TempsSchema = z.infer<typeof tempsSchema>;
 
 class Db {
   async connect(): Promise<void> {
@@ -22,7 +27,7 @@ class Db {
     return await prisma.lastTemp.findFirst();
   }
 
-  async addLastTemp(t: LastTemp): Promise<void> {
+  async addLastTemp(t: TempSchema): Promise<void> {
     const lastT = await prisma.lastTemp.findFirst();
     if (!lastT) {
       await prisma.lastTemp.create({ data: t });
@@ -36,12 +41,12 @@ class Db {
     });
   }
 
-  async addTemp(t: Temp) {
+  async addTemp(t: TempSchema) {
     await prisma.temp.create({
       data: t,
     });
   }
-  async addTemps(t: Temp[]) {
+  async addTemps(t: TempsSchema) {
     await prisma.temp.createMany({
       data: t,
     });

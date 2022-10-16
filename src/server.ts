@@ -1,38 +1,43 @@
 import express, { Request, Response, Express } from "express";
-import { LastTemp, Temp } from "@prisma/client";
-import cors from "cors";
 import Db from "./db";
+import validate from "./validate";
+import { tempSchema, tempsSchema } from "./schemas";
 
 const db = new Db();
-
 db.connect();
 
 const app: Express = express();
-app.use(cors());
+app.use(express.json());
 
-app.post("/add_temp", async (req: Request, res: Response) => {
-  const temp = req.body as Temp;
+app.post(
+  "/add_temp",
+  validate(tempSchema),
+  async (req: Request, res: Response) => {
+    db.addTemp(req.body);
 
-  db.addTemp(temp);
+    res.json("{}");
+  }
+);
 
-  res.json("{}");
-});
+app.post(
+  "/add_temps",
+  validate(tempsSchema),
+  async (req: Request, res: Response) => {
+    db.addTemps(req.body);
 
-app.post("/add_temps", async (req: Request, res: Response) => {
-  const temps = req.body as Temp[];
+    res.json("{}");
+  }
+);
 
-  db.addTemps(temps);
+app.post(
+  "/add_last_temp",
+  validate(tempsSchema),
+  async (req: Request, res: Response) => {
+    db.addLastTemp(req.body);
 
-  res.json("{}");
-});
-
-app.post("/add_last_temp", async (req: Request, res: Response) => {
-  const temp = req.body as LastTemp;
-
-  db.addLastTemp(temp);
-
-  res.json("{}");
-});
+    res.json("{}");
+  }
+);
 
 app.delete("/delete_temps/:m/:d", async (req: Request, res: Response) => {
   let m = Number(req.params.m);
