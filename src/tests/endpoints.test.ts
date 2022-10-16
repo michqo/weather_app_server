@@ -1,3 +1,7 @@
+/**
+ * Endpoint tests
+ */
+
 import supertest from "supertest";
 import { app, server, db } from "../server";
 

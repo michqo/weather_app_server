@@ -1,3 +1,7 @@
+/**
+ * Database helper
+ */
+
 import { LastTemp, Temp, PrismaClient } from "@prisma/client";
 import { z } from "zod";
 import { tempSchema, tempsSchema } from "./schemas";

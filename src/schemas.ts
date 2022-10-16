@@ -1,3 +1,7 @@
+/**
+ * Zod schemas
+ */
+
 import { z } from "zod";
 
 const tempSchema = z.object({
