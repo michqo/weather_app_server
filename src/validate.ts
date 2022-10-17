@@ -3,11 +3,12 @@
  */
 
 import { Request, Response, NextFunction } from "express";
-import { AnyZodObject } from "zod";
+import { AnyZodObject, z } from "zod";
 
-// TODO: make tempsSchema accepted by validate function
+type AnyZodArray = z.ZodArray<any, any>;
+
 const validate =
-  (schema: AnyZodObject) =>
+  (schema: AnyZodObject | AnyZodArray) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       await schema.parseAsync(req.body);
