@@ -28,7 +28,7 @@ router.post(
 
 router.post(
   "/add_last_temp",
-  validate(tempsSchema),
+  validate(tempSchema),
   async (req: Request, res: Response) => {
     db.addLastTemp(req.body);
 
