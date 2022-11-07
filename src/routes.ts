@@ -2,7 +2,7 @@ import express, { Request, Response, Router } from "express";
 
 import { db } from "./server";
 import validate from "./validate";
-import { tempSchema, tempsSchema } from "./schemas";
+import { tempSchema, tempSchema2, tempsSchema, tempsSchema2 } from "./schemas";
 
 const router: Router = express.Router();
 
@@ -27,8 +27,19 @@ router.post(
 );
 
 router.post(
+  "/add_temps_2",
+  validate(tempsSchema2),
+  async (req: Request, res: Response) => {
+    db.addTemps2(req.body);
+
+    res.json("{}");
+  }
+);
+
+// TODO: Make add_last_temp_2 route
+router.post(
   "/add_last_temp",
-  validate(tempSchema),
+  validate(tempSchema2),
   async (req: Request, res: Response) => {
     db.addLastTemp(req.body);
 

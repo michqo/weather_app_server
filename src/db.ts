@@ -4,12 +4,26 @@
 
 import { LastTemp, Temp, PrismaClient } from "@prisma/client";
 import { z } from "zod";
-import { tempSchema, tempsSchema } from "./schemas";
+import { tempSchema, tempSchema2, tempsSchema, tempsSchema2 } from "./schemas";
 
 const prisma = new PrismaClient();
 
 type TempSchema = z.infer<typeof tempSchema>;
 type TempsSchema = z.infer<typeof tempsSchema>;
+type TempSchema2 = z.infer<typeof tempSchema2>;
+type TempsSchema2 = z.infer<typeof tempsSchema2>;
+
+// TODO: Use Temp prisma generated type
+const addDate = (t: TempSchema2): any => {
+  const date = new Date();
+  return {
+    y: date.getFullYear(),
+    m: date.getMonth() + 1,
+    d: date.getDate(),
+    h: date.getHours(),
+    ...t,
+  };
+};
 
 class Db {
   async connect(): Promise<void> {
@@ -31,17 +45,18 @@ class Db {
     return await prisma.lastTemp.findFirst();
   }
 
-  async addLastTemp(t: TempSchema): Promise<void> {
+  async addLastTemp(t: TempSchema2): Promise<void> {
+    const data = addDate(t);
     const lastT = await prisma.lastTemp.findFirst();
     if (!lastT) {
-      await prisma.lastTemp.create({ data: t });
+      await prisma.lastTemp.create({ data: data });
       return;
     }
     await prisma.lastTemp.update({
       where: {
         id: lastT?.id,
       },
-      data: t,
+      data: data,
     });
   }
 
@@ -53,6 +68,11 @@ class Db {
   async addTemps(t: TempsSchema) {
     await prisma.temp.createMany({
       data: t,
+    });
+  }
+  async addTemps2(t: TempsSchema2) {
+    await prisma.temp.createMany({
+      data: t.map((i) => addDate(i)),
     });
   }
 

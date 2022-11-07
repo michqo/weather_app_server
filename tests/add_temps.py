@@ -5,7 +5,7 @@ import sys
 import dataclasses
 from dataclasses import dataclass
 
-URL = "http://192.168.0.110:8000"
+URL = "http://localhost:8000"
 add_url = "{}/add_temps".format(URL)
 
 @dataclass
