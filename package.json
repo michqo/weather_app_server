@@ -4,7 +4,8 @@
   "description": "Server for weather app",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --quiet --exit-child -r @swc-node/register src/server.ts",
-    "start": "NODE_ENV=production node dist/server.js",
+    "build": "swc src -d dist",
+    "start": "node dist/server.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "format": "prettier --write ."
