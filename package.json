@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Server for weather app",
   "scripts": {
-    "build": "swc src -d dist",
     "dev": "ts-node-dev --transpile-only --quiet --exit-child -r @swc-node/register src/server.ts",
     "start": "NODE_ENV=production node dist/server.js",
     "test": "jest",
