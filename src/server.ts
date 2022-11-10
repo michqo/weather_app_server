@@ -25,7 +25,7 @@ app.use("/", router);
 
 const PORT = process.env.PORT || 8000;
 const server = app.listen(PORT, () => {
-  console.log("started");
+  console.log(`started at port ${PORT}`);
 });
 
 export { app, server, db };
