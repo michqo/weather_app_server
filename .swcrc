@@ -1,18 +1,12 @@
 {
-  "exclude": [".*.js$", ".*.test.*$", ".*.map$"],
-    "jsc": {
-      "target": "es2016",
-      "parser": {
-        "syntax": "typescript",
-        "tsx": false,
-        "decorators": true,
-        "dynamicImport": true
-      },
-    "baseUrl": "src"
+  "jsc": {
+    "parser": {
+      "syntax": "typescript"
+    },
+    "target": "es2021"
   },
   "module": {
-    "type": "commonjs",
-    "strict": true,
-    "strictMode": true
-  }
+    "type": "commonjs"
+  },
+  "sourceMaps": true
 }
