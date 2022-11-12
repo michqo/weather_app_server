@@ -17,10 +17,10 @@ type TempsSchema2 = z.infer<typeof tempsSchema2>;
 const addDate = (t: TempSchema2): any => {
   const date = new Date();
   return {
-    y: date.getFullYear(),
-    m: date.getMonth() + 1,
-    d: date.getDate(),
-    h: date.getHours(),
+    y: date.getUTCFullYear(),
+    m: date.getUTCMonth() + 1,
+    d: date.getUTCDate(),
+    h: date.getUTCHours(),
     ...t,
   };
 };
