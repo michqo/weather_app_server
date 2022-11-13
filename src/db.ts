@@ -65,6 +65,11 @@ class Db {
       data: t,
     });
   }
+  async addTemp2(t: TempSchema2) {
+    await prisma.temp.create({
+      data: addDate(t),
+    });
+  }
   async addTemps(t: TempsSchema) {
     await prisma.temp.createMany({
       data: t,

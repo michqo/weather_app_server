@@ -17,6 +17,16 @@ router.post(
 );
 
 router.post(
+  "/add_temp2",
+  validate(tempSchema2),
+  async (req: Request, res: Response) => {
+    db.addTemp2(req.body);
+
+    res.json("{}");
+  }
+);
+
+router.post(
   "/add_temps",
   validate(tempsSchema),
   async (req: Request, res: Response) => {
