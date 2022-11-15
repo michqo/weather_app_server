@@ -16,6 +16,7 @@ model Temp {
   d             Int
   h             Int
   averageTemp   String
+  humidity   String
 }
 
 model LastTemp {
@@ -25,4 +26,5 @@ model LastTemp {
   d             Int
   h             Int
   averageTemp   String
+  humidity   String
 }
