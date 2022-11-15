@@ -15,6 +15,7 @@ class Temp:
     d: int
     h: int = 0
     averageTemp: str = ""
+    humidity: str = ""
 
 now = datetime.datetime.now()
 data = Temp(now.year, now.month, now.day)
@@ -29,7 +30,9 @@ def main():
         lower = random.uniform(21, 22.5)
         upper = random.uniform(22.5, 24.5)
         temp = random.uniform(lower, upper)
-        data.averageTemp = str(round(temp, 2))
+        humidity = random.uniform(50, 70)
+        data.averageTemp = str(round(temp, 1))
+        data.humidity = str(round(humidity, 1))
         data.h = i
         temps.append(dataclasses.asdict(data))
 
