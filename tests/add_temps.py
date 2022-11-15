@@ -17,7 +17,7 @@ class Temp:
     averageTemp: str = ""
     humidity: str = ""
 
-now = datetime.datetime.now()
+now = datetime.datetime.utcnow()
 data = Temp(now.year, now.month, now.day)
 temps: list[dict] = []
 
