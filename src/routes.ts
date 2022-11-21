@@ -66,6 +66,16 @@ router.delete("/delete_temps/:m/:d", async (req: Request, res: Response) => {
   res.json("{}");
 });
 
+router.delete("/delete_temp/:m/:d/:h", async (req: Request, res: Response) => {
+  let m = Number(req.params.m);
+  let d = Number(req.params.d);
+  let h = Number(req.params.h);
+  if (!isNaN(m) && !isNaN(d) && !isNaN(h)) {
+    await db.deleteTemp(m, d, h);
+  }
+  res.json("{}");
+});
+
 router.get("/temps/:m/:d", async (req: Request, res: Response) => {
   let m = Number(req.params.m);
   let d = Number(req.params.d);

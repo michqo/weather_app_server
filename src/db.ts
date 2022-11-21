@@ -84,6 +84,9 @@ class Db {
   async deleteTemps(m: number, d: number): Promise<void> {
     await prisma.temp.deleteMany({ where: { m: m, d: d } });
   }
+  async deleteTemp(m: number, d: number, h: number): Promise<void> {
+    await prisma.temp.deleteMany({ where: { m: m, d: d, h: h } });
+  }
 
   async getTemps(m: number, d: number): Promise<Temp[]> {
     return await prisma.temp.findMany({ where: { m: m, d: d } });
