@@ -1,13 +1,14 @@
 import express, { Request, Response, Router } from "express";
 
 import { db } from "./server";
-import validate from "./validate";
+import { validate, secretAuth } from "./helper";
 import { tempSchema, tempSchema2, tempsSchema, tempsSchema2 } from "./schemas";
 
 const router: Router = express.Router();
 
 router.post(
-  "/add_temp",
+  "/add_temp/:secret",
+  secretAuth(),
   validate(tempSchema),
   async (req: Request, res: Response) => {
     db.addTemp(req.body);
@@ -17,7 +18,8 @@ router.post(
 );
 
 router.post(
-  "/add_temp2",
+  "/add_temp2/:secret",
+  secretAuth(),
   validate(tempSchema2),
   async (req: Request, res: Response) => {
     db.addTemp2(req.body);
@@ -27,7 +29,8 @@ router.post(
 );
 
 router.post(
-  "/add_temps",
+  "/add_temps/:secret",
+  secretAuth(),
   validate(tempsSchema),
   async (req: Request, res: Response) => {
     db.addTemps(req.body);
@@ -37,7 +40,8 @@ router.post(
 );
 
 router.post(
-  "/add_temps_2",
+  "/add_temps_2/:secret",
+  secretAuth(),
   validate(tempsSchema2),
   async (req: Request, res: Response) => {
     db.addTemps2(req.body);
@@ -48,7 +52,8 @@ router.post(
 
 // TODO: Make add_last_temp_2 route
 router.post(
-  "/add_last_temp",
+  "/add_last_temp/:secret",
+  secretAuth(),
   validate(tempSchema2),
   async (req: Request, res: Response) => {
     db.addLastTemp(req.body);
@@ -57,24 +62,32 @@ router.post(
   }
 );
 
-router.delete("/delete_temps/:m/:d", async (req: Request, res: Response) => {
-  let m = Number(req.params.m);
-  let d = Number(req.params.d);
-  if (!isNaN(m) && !isNaN(d)) {
-    await db.deleteTemps(m, d);
+// Uses UTC time
+router.delete(
+  "/delete_temps/:m/:d/:secret",
+  secretAuth(),
+  async (req: Request, res: Response) => {
+    let m = Number(req.params.m);
+    let d = Number(req.params.d);
+    if (!isNaN(m) && !isNaN(d)) {
+      await db.deleteTemps(m, d);
+    }
+    res.json("{}");
   }
-  res.json("{}");
-});
-
-router.delete("/delete_temp/:m/:d/:h", async (req: Request, res: Response) => {
-  let m = Number(req.params.m);
-  let d = Number(req.params.d);
-  let h = Number(req.params.h);
-  if (!isNaN(m) && !isNaN(d) && !isNaN(h)) {
-    await db.deleteTemp(m, d, h);
+);
+router.delete(
+  "/delete_temp/:m/:d/:h/:secret",
+  secretAuth(),
+  async (req: Request, res: Response) => {
+    let m = Number(req.params.m);
+    let d = Number(req.params.d);
+    let h = Number(req.params.h);
+    if (!isNaN(m) && !isNaN(d) && !isNaN(h)) {
+      await db.deleteTemp(m, d, h);
+    }
+    res.json("{}");
   }
-  res.json("{}");
-});
+);
 
 router.get("/temps/:m/:d", async (req: Request, res: Response) => {
   let m = Number(req.params.m);

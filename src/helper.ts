@@ -1,5 +1,5 @@
 /**
- * Zod express middleware to validate schemas
+ * Zod express middlewares to validate schemas
  */
 
 import { Request, Response, NextFunction } from "express";
@@ -18,4 +18,12 @@ const validate =
     }
   };
 
-export default validate;
+const secretAuth =
+  () => async (req: Request, res: Response, next: NextFunction) => {
+    if (req.params.secret == process.env.SECRET) {
+      return next();
+    }
+    res.status(400).json({});
+  };
+
+export { validate, secretAuth };
